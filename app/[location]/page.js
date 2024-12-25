@@ -1,5 +1,6 @@
 import Image from "next/image";
 import GetWeatherInfo from "../lib/GetWeatherInfo";
+import LocationSwitcher from "../components/LocationSwitcher";
 
 
 const LocationMainPage=async({params,searchParams})=> {
@@ -7,6 +8,8 @@ const LocationMainPage=async({params,searchParams})=> {
  const weatherInfo=await GetWeatherInfo(latitude,longitude);
  const {current}=weatherInfo;
  console.log(weatherInfo);
+
+
   return (
 
 <div className="card bg-base-100 w-96 shadow-xl">
@@ -27,11 +30,15 @@ const LocationMainPage=async({params,searchParams})=> {
        >
 
        </Image>
+
+
     </p>
+
   </div>
   <figure>
    
   </figure>
+  <LocationSwitcher></LocationSwitcher>
 </div>
 
   );

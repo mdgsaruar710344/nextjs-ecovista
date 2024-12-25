@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 export default  function Home() {
 
-    const [loading,setLoading]=useState(false);
+    const [loading,setLoading]=useState(true);
     const [location,setLocation]=useState({});
 
     const router=useRouter();
@@ -28,7 +28,7 @@ export default  function Home() {
         }
 
         else{
-            setLoading(true);
+            
           navigator.geolocation.getCurrentPosition(position=>{
           const latitude= position.coords.latitude;
           const longitude=position.coords.longitude;
@@ -55,7 +55,13 @@ export default  function Home() {
   // const lastobject= Object.fromEntries(objectparams);
   // console.log(lastobject);
 
-
+if(loading){
+  return (
+<div className="text-red-600 text-4xl">
+ Loading page and tracking location
+</div>
+  )
+}
   return (
     <div className="items-center justify-items-center min-h-screen bg-cover text-yellow-500" style={{backgroundImage: "url('/background.png')"}}>
   <h1 className="text-yellow-400">Home  Page
@@ -63,7 +69,7 @@ export default  function Home() {
   </h1>
  
   <br></br>
-    {loading && < > Loading...</>}
+    
     <div>
       longitude:
       {location.lon}
