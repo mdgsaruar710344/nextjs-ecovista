@@ -66,7 +66,7 @@ const getAllCities=()=>{
 }
 
 const getCityByName= (locationName)=>{
-const location= data.map(city=>city.city.toLocaleLowerCase()==locationName.toLocaleLowerCase());
-return location;
+const location= data.find(city=>city.city.toLocaleLowerCase()==locationName.toLocaleLowerCase());
+return location||null;
 }
 export {getAllCities,getCityByName};

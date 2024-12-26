@@ -3,9 +3,15 @@ import reverseGeoCode from "@/app/lib/GetReverseCode";
 
 
  const LocationPage=async ({params,searchParams})=> {
-  const {latitude,longitude}=searchParams;
+  let locationName;
+  const latitude=searchParams?.latitude;
+  const longitude=searchParams?.longitude;
+
+    if(latitude&&longitude){
+      locationName=await reverseGeoCode(latitude,longitude);
+    }
   console.log(latitude,longitude);
-const locationName=await reverseGeoCode(latitude,longitude);
+
   console.log('location name:',locationName);
   return (
     <div>

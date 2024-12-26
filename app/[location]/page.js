@@ -1,14 +1,31 @@
 import Image from "next/image";
 import GetWeatherInfo from "../lib/GetWeatherInfo";
 import LocationSwitcher from "../components/LocationSwitcher";
+import { getCityByName } from "../data/database";
 
 
 const LocationMainPage=async({params,searchParams})=> {
-  const {latitude,longitude}=searchParams;
- const weatherInfo=await GetWeatherInfo(latitude,longitude);
- const {current}=weatherInfo;
- console.log(weatherInfo);
 
+ const location=params?.location;
+ let currentWeather;
+
+      
+        const inputLocation= location&& getCityByName(location);
+        if(inputLocation){
+          console.log("Input Location:",inputLocation);
+          const weatherInfo=await GetWeatherInfo(inputLocation.latitude,inputLocation.longitude);
+          const {current}=weatherInfo;
+          currentWeather=current;
+          console.log(weatherInfo);
+        }
+      
+      else{
+        const {latitude,longitude}=searchParams;
+        const weatherInfo=await GetWeatherInfo(latitude,longitude);
+        const {current}=weatherInfo;
+        currentWeather=current;
+        console.log(weatherInfo);
+      }
 
   return (
 
@@ -19,9 +36,9 @@ const LocationMainPage=async({params,searchParams})=> {
 
     Location Main Page.
       <br></br>
-       Current Temp: {weatherInfo && current.temp_c} degree Celcius
+       Current Temp: {currentWeather && currentWeather.temp_c} degree Celcius
        <br></br>
-       Current wind: {weatherInfo && current.wind_kph} kph
+       Current wind: {currentWeather && currentWeather.wind_kph} kph
        <Image 
        alt="wind"
        src="/icon_wind.png"

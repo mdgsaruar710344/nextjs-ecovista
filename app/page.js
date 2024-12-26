@@ -46,15 +46,6 @@ export default  function Home() {
       },[])
     
     
-
-
- 
-  // const searchparams=useSearchParams();
-  // const finalParams=new URLSearchParams(searchParams);
-  // const objectparams=Object.entries(searchParams);
-  // const lastobject= Object.fromEntries(objectparams);
-  // console.log(lastobject);
-
 if(loading){
   return (
 <div className="text-red-600 text-4xl">
